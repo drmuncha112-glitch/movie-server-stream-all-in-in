@@ -1,0 +1,19 @@
+{
+  "name": "torrent-jellyfin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "fs-extra": "^11.3.4",
+    "torrent-search-api": "^2.1.4",
+    "torrent-stream": "^1.2.1",
+    "webtorrent": "^1.9.7"
+  }
+}

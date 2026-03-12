@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>JellyStream</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+font-family:'Inter',sans-serif;
+background:linear-gradient(135deg,#0f0f0f,#1a1a1a);
+color:white;
+padding:25px;
+margin:0;
+}
+
+/* top bar */
+
+#top-bar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
+}
+
+/* title */
+
+#top-bar h2{
+margin:0;
+font-weight:600;
+letter-spacing:0.5px;
+}
+
+/* buttons */
+
+button{
+padding:10px 18px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:600;
+background:#0085ff;
+color:white;
+transition:0.2s;
+}
+
+button:hover{
+background:#0066cc;
+}
+
+/* reset button */
+
+.nuke-btn{
+background:#ff4444;
+}
+
+.nuke-btn:hover{
+background:#cc2222;
+}
+
+/* search */
+
+#search-box{
+display:flex;
+gap:10px;
+margin-bottom:25px;
+}
+
+input{
+flex:1;
+padding:12px 14px;
+border:none;
+border-radius:12px;
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(20px);
+color:white;
+font-size:15px;
+}
+
+input::placeholder{
+color:#bbb;
+}
+
+/* status text */
+
+#status{
+margin:10px 0;
+color:#aaa;
+font-style:italic;
+}
+
+/* movie grid */
+
+#movies{
+display:grid;
+grid-template-columns:repeat(auto-fill,200px);
+gap:25px;
+margin-top:20px;
+}
+
+/* movie cards */
+
+.movie{
+text-align:center;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
+border-radius:14px;
+padding:12px;
+transition:0.25s;
+}
+
+.movie:hover{
+transform:scale(1.05);
+box-shadow:0 0 25px rgba(0,133,255,0.5);
+}
+
+.movie img{
+width:100%;
+border-radius:10px;
+margin-bottom:10px;
+}
+
+/* torrent cards */
+
+.torrent{
+grid-column:1/-1;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(18px);
+padding:16px;
+border-radius:12px;
+border-left:4px solid #0085ff;
+}
+
+.torrent h4{
+margin-top:0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="top-bar">
+<h2>JellyStream</h2>
+<button class="nuke-btn" onclick="nuke()">Reset System</button>
+</div>
+
+<div id="search-box">
+<input id="search" placeholder="Enter movie title...">
+<button type="button" onclick="search()">Search</button>
+</div>
+
+<div id="status">Ready</div>
+
+<div id="movies"></div>
+
+<script>
+
+async function nuke(){
+
+if(!confirm("Stop all streams and clear Google Drive?")) return;
+
+const status=document.getElementById("status")
+
+status.innerText="Nuking system..."
+
+const r=await fetch('/nuke',{method:'POST'})
+const res=await r.json()
+
+status.innerText=res.status
+
+location.reload()
+
+}
+
+</script>
+
+<script src="app.js"></script>
+
+</body>
+</html>
